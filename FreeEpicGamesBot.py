@@ -1,11 +1,15 @@
 import subprocess
 import pyautogui
+import time
 
-subprocess.run('D:\Games\EPIC\Epic Games\Launcher\Portal\Binaries\Win32\EpicGamesLauncher.exe')
+time.sleep(3)
+
+epicProcess = subprocess.run('D:\Games\EPIC\Epic Games\Launcher\Portal\Binaries\Win32\EpicGamesLauncher.exe')
 
 onHomeScreen = False
 onGameScreen = False
 onThePurchaseScreen = False
+closeScreen = False
 
 while onHomeScreen == False: 
     gameButtonLocation = pyautogui.locateCenterOnScreen('img/free.png', confidence= 0.7)
@@ -23,7 +27,7 @@ while onGameScreen == False:
     if cartButtonLocation != None:
         pyautogui.moveTo(cartButtonLocation.x,cartButtonLocation.y-50)
         pyautogui.click()
-        onGameScreen = True  
+        onGameScreen = True
 
 while onThePurchaseScreen == False:
     purchaseButtonLocation = pyautogui.locateCenterOnScreen('img/purchase.png', confidence= 0.7)
@@ -32,6 +36,17 @@ while onThePurchaseScreen == False:
         pyautogui.click()
         onThePurchaseScreen = True
 
+while closeScreen == False:
+    xButtonLocation = pyautogui.locateCenterOnScreen('img/closeApp.png', confidence= 0.7)
+    print(xButtonLocation)
+    if xButtonLocation != None:
+        pyautogui.moveTo(xButtonLocation.x+40,xButtonLocation.y)
+        time.sleep(3)
+        pyautogui.click()
+        closeScreen = True
+
+
+	
 
 
 
